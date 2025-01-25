@@ -1,3 +1,5 @@
+package ca.mcmaster.se2aa4.mazerunner;
+
 import java.io.*;
 import java.util.*;
 
@@ -37,4 +39,3 @@ public class Maze {
         return cols;
     }
 }
-
