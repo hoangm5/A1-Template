@@ -1,41 +1,52 @@
-package ca.mcmaster.se2aa4.mazerunner;
+package ca.mcmaster.se2aa4.mazerunner.maze;
 
-import java.io.*;
-import java.util.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class Maze {
-    private char[][] grid;
-    private int rows, cols;
+    private final char[][] grid;
+    private final int rows, cols;
+    private int entryRow, entryCol, exitRow, exitCol;
 
-    public Maze(File mazeFile) throws IOException {
-        List<String> lines = new ArrayList<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(mazeFile))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                lines.add(line);
-            }
-        }
+    public Maze(String filename) throws IOException {
+        List<String> lines = Files.readAllLines(Paths.get(filename));
         rows = lines.size();
         cols = lines.get(0).length();
         grid = new char[rows][cols];
+
         for (int i = 0; i < rows; i++) {
             grid[i] = lines.get(i).toCharArray();
         }
+
+        findEntryExit();
     }
 
-    public boolean isWall(int row, int col) {
-        return grid[row][col] == '#';
+    private void findEntryExit() {
+        for (int r = 0; r < rows; r++) {
+            if (grid[r][0] == ' ') { entryRow = r; entryCol = 0; }
+            if (grid[r][cols - 1] == ' ') { exitRow = r; exitCol = cols - 1; }
+        }
     }
 
-    public boolean isPassage(int row, int col) {
-        return grid[row][col] == ' ';
+    public boolean isWall(int r, int c) {
+        return grid[r][c] == '#';
     }
 
-    public int getRows() {
-        return rows;
+    public boolean isExit(int r, int c) {
+        return r == exitRow && c == exitCol;
     }
 
-    public int getCols() {
-        return cols;
+    public int getEntryRow() { return entryRow; }
+    public int getEntryCol() { return entryCol; }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (char[] row : grid) {
+            sb.append(row).append("\n");
+        }
+        return sb.toString();
     }
 }

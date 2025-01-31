@@ -8,7 +8,7 @@
   <packaging>jar</packaging>
 
   <groupId>io.github.ace-lectures.2aa4</groupId>
-  <artifactId>a1-yourMacId</artifactId> <!-- Replace with your MacID -->
+  <artifactId>a1-hoangm5</artifactId> <!-- Replace with your MacID -->
   <version>1.0</version>
   <name>McMaster :: SFWRENG :: 2AA4 :: Maze Runner</name>
 
@@ -99,3 +99,4 @@
   </dependencyManagement>
 
 </project>
+
